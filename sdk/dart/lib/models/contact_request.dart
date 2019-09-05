@@ -11,9 +11,10 @@ class ContactRequestResponse extends ApiObject {
   @JsonKey(includeIfNull: false, name: 'LastKey', nullable: false)
   String lastKey; //`json:"LastKey,omitempty"`
 
-  ContactRequestResponse({ this.items, this.lastKey });
+  ContactRequestResponse({this.items, this.lastKey});
 
-  factory ContactRequestResponse.fromJson(Map<String, dynamic> json) => _$ContactRequestResponseFromJson(json);
+  factory ContactRequestResponse.fromJson(Map<String, dynamic> json) =>
+      _$ContactRequestResponseFromJson(json);
 
   @override
   Map<String, dynamic> toJson() => _$ContactRequestResponseToJson(this);

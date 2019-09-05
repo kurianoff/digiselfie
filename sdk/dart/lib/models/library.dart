@@ -12,7 +12,6 @@ export 'user.dart';
 export 'api_object.dart';
 
 DateTime dateTimeFromEpochUs(int us) =>
-us == null ? null : DateTime.fromMicrosecondsSinceEpoch(us);
+    us == null ? null : DateTime.fromMicrosecondsSinceEpoch(us);
 
-int dateTimeToEpochUs(DateTime dateTime) =>
-dateTime?.microsecondsSinceEpoch;
+int dateTimeToEpochUs(DateTime dateTime) => dateTime?.microsecondsSinceEpoch;

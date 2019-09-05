@@ -7,18 +7,19 @@ class ContactRequestsApi extends Api {
   String endpoint;
   ClaimDigiSelfie defaultSelfie;
 
-  ContactRequestsApi(ApiClient client, ClaimDigiSelfie defaultSelfie) : super(client) {
+  ContactRequestsApi(ApiClient client, ClaimDigiSelfie defaultSelfie)
+      : super(client) {
     this.endpoint = ApiEndpoints.ContactRequests;
     this.defaultSelfie = defaultSelfie;
   }
 
   Future<ApiResponse> accept(String myId, String requestId) async {
     String url = this.endpoint.replaceAll("{id}", myId);
-    return await this.client.makeCall("PUT", url, null, [ requestId ]);
+    return await this.client.makeCall("PUT", url, null, [requestId]);
   }
 
   Future<ApiResponse> reject(String myId, String requestId) async {
     String url = this.endpoint.replaceAll("{id}", myId);
-    return await this.client.makeCall("DELETE", url, null, [ requestId ]);
+    return await this.client.makeCall("DELETE", url, null, [requestId]);
   }
 }

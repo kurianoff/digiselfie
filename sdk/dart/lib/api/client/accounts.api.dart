@@ -13,8 +13,8 @@ class AccountsApi extends Api {
   }
 
   Future<ApiResponse> locate(String email, String phone) async {
-    String url = this.endpoint
-        + "?ak=" + this.client.environment.applicationApiKey;
+    String url =
+        this.endpoint + "?ak=" + this.client.environment.applicationApiKey;
 
     var accountLocator = AccountCreateRecoverRequest(
       email: email,
@@ -26,10 +26,12 @@ class AccountsApi extends Api {
   }
 
   Future<ApiResponse> verify(String locatorId, String code) async {
-    String url = ApiEndpoints.AccessRecovery.replaceAll("{id}", locatorId)
-        + "?ak=" + this.client.environment.applicationApiKey;
+    String url = ApiEndpoints.AccessRecovery.replaceAll("{id}", locatorId) +
+        "?ak=" +
+        this.client.environment.applicationApiKey;
 
-    return await this.client.makeCall("POST", url, null,
-        AccountConfirmationRequest(code: code));
+    return await this
+        .client
+        .makeCall("POST", url, null, AccountConfirmationRequest(code: code));
   }
 }

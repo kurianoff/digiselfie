@@ -4,38 +4,44 @@ import 'library.dart';
 part 'digiselfie.g.dart';
 
 @JsonSerializable()
-class DigitalSelfie extends ApiObject with DigitalSelfieUpdatesMixin,
-    TypedObjectMixin,
-    DigitalSelfieReadOnlyMixin,
-    DigitalSelfieWritableMixin {
-
+class DigitalSelfie extends ApiObject
+    with
+        DigitalSelfieUpdatesMixin,
+        TypedObjectMixin,
+        DigitalSelfieReadOnlyMixin,
+        DigitalSelfieWritableMixin {
   DigitalSelfie();
 
-  factory DigitalSelfie.fromJson(Map<String, dynamic> json) => _$DigitalSelfieFromJson(json);
+  factory DigitalSelfie.fromJson(Map<String, dynamic> json) =>
+      _$DigitalSelfieFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$DigitalSelfieToJson(this);
 }
 
 @JsonSerializable()
-class DigitalSelfieWritable extends ApiObject with DigitalSelfieUpdatesMixin,
-    TypedObjectMixin,
-    DigitalSelfieWritableMixin {
-
+class DigitalSelfieWritable extends ApiObject
+    with
+        DigitalSelfieUpdatesMixin,
+        TypedObjectMixin,
+        DigitalSelfieWritableMixin {
   DigitalSelfieWritable();
 
-  factory DigitalSelfieWritable.fromJson(Map<String, dynamic> json) => _$DigitalSelfieWritableFromJson(json);
+  factory DigitalSelfieWritable.fromJson(Map<String, dynamic> json) =>
+      _$DigitalSelfieWritableFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$DigitalSelfieWritableToJson(this);
 }
 
 @JsonSerializable()
-class DigitalSelfieReadOnly extends ApiObject with DigitalSelfieUpdatesMixin,
-    TypedObjectMixin,
-    DigitalSelfieReadOnlyMixin {
-
+class DigitalSelfieReadOnly extends ApiObject
+    with
+        DigitalSelfieUpdatesMixin,
+        TypedObjectMixin,
+        DigitalSelfieReadOnlyMixin {
   DigitalSelfieReadOnly();
 
-  factory DigitalSelfieReadOnly.fromJson(Map<String, dynamic> json) => _$DigitalSelfieReadOnlyFromJson(json);
+  factory DigitalSelfieReadOnly.fromJson(Map<String, dynamic> json) =>
+      _$DigitalSelfieReadOnlyFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$DigitalSelfieReadOnlyToJson(this);
 }
@@ -49,17 +55,18 @@ class DigiSelfieList extends ApiObject {
 
   DigiSelfieList({this.items, this.lastKey});
 
-  factory DigiSelfieList.fromJson(Map<String, dynamic> json) => _$DigiSelfieListFromJson(json);
+  factory DigiSelfieList.fromJson(Map<String, dynamic> json) =>
+      _$DigiSelfieListFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$DigiSelfieListToJson(this);
 }
 
 @JsonSerializable()
 class ClaimDigiSelfie extends ApiObject with ClaimDigiSelfieMixin {
-
   ClaimDigiSelfie();
 
-  factory ClaimDigiSelfie.fromJson(Map<String, dynamic> json) => _$ClaimDigiSelfieFromJson(json);
+  factory ClaimDigiSelfie.fromJson(Map<String, dynamic> json) =>
+      _$ClaimDigiSelfieFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$ClaimDigiSelfieToJson(this);
 }
@@ -77,7 +84,8 @@ class PublicProfileDigiselfie extends ApiObject with ClaimDigiSelfieMixin {
 
   PublicProfileDigiselfie({this.qrCode, this.qrCodeId, this.applicationLinks});
 
-  factory PublicProfileDigiselfie.fromJson(Map<String, dynamic> json) => _$PublicProfileDigiselfieFromJson(json);
+  factory PublicProfileDigiselfie.fromJson(Map<String, dynamic> json) =>
+      _$PublicProfileDigiselfieFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PublicProfileDigiselfieToJson(this);
 }

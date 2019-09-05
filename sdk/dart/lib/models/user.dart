@@ -4,7 +4,7 @@ import 'api_object.dart';
 part 'user.g.dart';
 
 @JsonSerializable()
-class User extends ApiObject  {
+class User extends ApiObject {
   @JsonKey(includeIfNull: true, name: 'Id', nullable: false)
   String id;
 
@@ -29,8 +29,17 @@ class User extends ApiObject  {
   @JsonKey(includeIfNull: false, name: 'Type', nullable: true)
   String type; //`json:"Type,omitempty"`
 
-  User({this.id, this.email, this.phone, this.digiSelfie, this.firstName,
-    this.middleName, this.lastName, this.suffix, this.salutation, this.type});
+  User(
+      {this.id,
+      this.email,
+      this.phone,
+      this.digiSelfie,
+      this.firstName,
+      this.middleName,
+      this.lastName,
+      this.suffix,
+      this.salutation,
+      this.type});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

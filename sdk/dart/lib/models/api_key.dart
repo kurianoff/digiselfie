@@ -33,10 +33,20 @@ class ApiKey extends ApiObject with TypedObjectMixin {
   @JsonKey(includeIfNull: false, name: 'Ttl', nullable: true)
   BigInt ttl; //`json:"ttl,omitempty"`
 
-  ApiKey({this.apiKey, this.digiSelfieType,
-    this.userId, this.apiSecret, this.siteUrl, this.siteName,
-    this.allowedOriginIPs, this.callbackUrl, this.redirectUrl,
-    this.authClientId, this.authClientSecret, this.deleted, this.ttl });
+  ApiKey(
+      {this.apiKey,
+      this.digiSelfieType,
+      this.userId,
+      this.apiSecret,
+      this.siteUrl,
+      this.siteName,
+      this.allowedOriginIPs,
+      this.callbackUrl,
+      this.redirectUrl,
+      this.authClientId,
+      this.authClientSecret,
+      this.deleted,
+      this.ttl});
 
   factory ApiKey.fromJson(Map<String, dynamic> json) => _$ApiKeyFromJson(json);
 
@@ -50,13 +60,10 @@ class ApiKeyList {
   ApiKeyList({this.apiKeyList});
 
   factory ApiKeyList.fromJson(List<dynamic> parsedJson) {
-
     List<ApiKey> apiKeyList = new List<ApiKey>();
-    apiKeyList = parsedJson.map((i)=>ApiKey.fromJson(i)).toList();
+    apiKeyList = parsedJson.map((i) => ApiKey.fromJson(i)).toList();
 
-    return new ApiKeyList(
-      apiKeyList: apiKeyList
-    );
+    return new ApiKeyList(apiKeyList: apiKeyList);
   }
 
   List<dynamic> toJson() {

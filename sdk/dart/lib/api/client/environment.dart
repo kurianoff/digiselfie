@@ -15,15 +15,18 @@ class ApiEnvironment {
   String serverUrl;
   String apiUrl;
 
-  ApiEnvironment({this.server, this.protocol, this.apiVersion,
-  this.applicationId, this.applicationApiKey,
-    this.loginUrl, this.oAuthConfig }) {
-
+  ApiEnvironment(
+      {this.server,
+      this.protocol,
+      this.apiVersion,
+      this.applicationId,
+      this.applicationApiKey,
+      this.loginUrl,
+      this.oAuthConfig}) {
     this.serverUrl = this.protocol + protocolLiteral + this.server;
     this.apiUrl = this.serverUrl + apiLiteral + this.apiVersion;
     this.loginUrl = this.apiUrl + this.loginUrl;
 
     oAuthConfig.serverUrl = this.serverUrl;
   }
-
 }

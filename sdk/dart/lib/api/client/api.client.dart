@@ -12,7 +12,7 @@ class ResponseTester {
   ResponseTester(this.statusCode);
 
   factory ResponseTester.fromHttpClientResponse(
-      [HttpClientResponse response]) =>
+          [HttpClientResponse response]) =>
       new ResponseTester._(response.statusCode);
 
   int get code {
@@ -88,9 +88,8 @@ class ApiClient {
     return Api(this);
   }
 
-  Future<ApiResponse> makeCall(String method, String url, List<Cookie> cookies,
-      Object payload) async {
-
+  Future<ApiResponse> makeCall(
+      String method, String url, List<Cookie> cookies, Object payload) async {
     url = this.environment.apiUrl + url;
     Uri uri;
 
@@ -110,8 +109,8 @@ class ApiClient {
       HttpClientRequest request = await client.openUrl(method, uri);
 
       if (this.hasToken) {
-        request.headers.add(HttpHeaders.authorizationHeader,
-            "Bearer " + this.accessToken);
+        request.headers
+            .add(HttpHeaders.authorizationHeader, "Bearer " + this.accessToken);
 
         print("Token: " + this.accessToken);
       }
@@ -126,24 +125,21 @@ class ApiClient {
 
       String requestPayload = "";
       if (payload != null) {
-
         if (payload is ApiObject) {
           requestPayload = JsonEncoder().convert(payload.toJson());
         } else if (payload is String) {
           requestPayload = payload;
         }
 
-        print ("Sending payload: " + requestPayload + "\n");
+        print("Sending payload: " + requestPayload + "\n");
         request.write(requestPayload);
       }
 
       response = await request.close();
       print("Status code: " + response.statusCode.toString());
 
-      body = await response.cast<List<int>>()
-          .transform(utf8.decoder)
-          .join();
-    } catch(e) {
+      body = await response.cast<List<int>>().transform(utf8.decoder).join();
+    } catch (e) {
       throw ApiException(e.toString());
     }
 
@@ -178,11 +174,21 @@ class ApiClient {
 
   Future<void> _getOAuthRolling(String digithentiCode) async {
     OAuthConfig config = this.environment.oAuthConfig;
-    String queryString = "?" + "client_id=" + config.clientId + "&" +
-        "redirect_uri=" + Uri.encodeQueryComponent(config.callbackUri) + "&" +
-        "response_type=" + "code" + "&" + "scope=" + "offline+digiselfie" +
+    String queryString = "?" +
+        "client_id=" +
+        config.clientId +
         "&" +
-        "state=" + digithentiCode;
+        "redirect_uri=" +
+        Uri.encodeQueryComponent(config.callbackUri) +
+        "&" +
+        "response_type=" +
+        "code" +
+        "&" +
+        "scope=" +
+        "offline+digiselfie" +
+        "&" +
+        "state=" +
+        digithentiCode;
 
     String url = config.oAuthUrl + queryString;
 
@@ -221,10 +227,8 @@ class ApiClient {
         cookies.addAll(response.cookies);
       }
 
-      body = await response.cast<List<int>>()
-          .transform(utf8.decoder)
-          .join();
-    } catch(e) {
+      body = await response.cast<List<int>>().transform(utf8.decoder).join();
+    } catch (e) {
       throw ApiException(e.toString());
     }
 
@@ -238,24 +242,20 @@ class ApiClient {
     Stream<String> accessTokenStream = await _serveAccessToken();
     String streamData;
 
-    try{
+    try {
       _getOAuthRolling(digithentiCode);
-    } catch(e) {
+    } catch (e) {
       throw ApiException(e.toString());
     }
 
-    streamData = await accessTokenStream.first.timeout(
-      new Duration(seconds: 10),
-      onTimeout:
-          () => streamData = """Login is taking too long. 
-          Please check your internet connection and try again."""
-    );
+    streamData =
+        await accessTokenStream.first.timeout(new Duration(seconds: 10),
+            onTimeout: () => streamData = """Login is taking too long. 
+          Please check your internet connection and try again.""");
 
     try {
-      return AccessTokenJar.fromJson(
-          JsonDecoder().convert(streamData)
-      );
-    } catch(e) {
+      return AccessTokenJar.fromJson(JsonDecoder().convert(streamData));
+    } catch (e) {
       throw ApiException(streamData);
     }
   }
@@ -264,7 +264,9 @@ class ApiClient {
     OAuthConfig config = this.environment.oAuthConfig;
 
     String payload = "grant_type=authorization_code" +
-        "&code=" + code + "&redirect_uri=" +
+        "&code=" +
+        code +
+        "&redirect_uri=" +
         Uri.encodeQueryComponent(config.callbackUri);
 
     String url = config.oAuthTokenUrl;
@@ -272,25 +274,22 @@ class ApiClient {
     HttpClientResponse response;
     String body;
 
-    try{
-      HttpClientRequest request = await HttpClient()
-          .postUrl(Uri.parse(url));
+    try {
+      HttpClientRequest request = await HttpClient().postUrl(Uri.parse(url));
 
-      request.headers.add(HttpHeaders.contentTypeHeader,
-          "application/x-www-form-urlencoded");
+      request.headers.add(
+          HttpHeaders.contentTypeHeader, "application/x-www-form-urlencoded");
 
       List<int> bytes = utf8.encode(config.clientId + ":" + config.secret);
-      request.headers.add(HttpHeaders.authorizationHeader,
-          "Basic " + base64Url.encode(bytes));
+      request.headers.add(
+          HttpHeaders.authorizationHeader, "Basic " + base64Url.encode(bytes));
 
       request.write(payload);
 
       response = await request.close();
 
-      body = await response.cast<List<int>>()
-          .transform(utf8.decoder)
-          .join();
-    } catch(e) {
+      body = await response.cast<List<int>>().transform(utf8.decoder).join();
+    } catch (e) {
       throw ApiException(e.toString());
     }
 
@@ -303,12 +302,10 @@ class ApiClient {
   }
 
   Future<Stream<String>> _serveAccessToken() async {
-    OAuthCallbackHandler handler =
-        this.environment.oAuthConfig.callbackHandler;
+    OAuthCallbackHandler handler = this.environment.oAuthConfig.callbackHandler;
 
     final StreamController<String> onCode = new StreamController();
-    HttpServer server =
-    await HttpServer.bind(handler.address, handler.port);
+    HttpServer server = await HttpServer.bind(handler.address, handler.port);
 
     server.listen((HttpRequest request) async {
       final String code = request.uri.queryParameters["code"];
@@ -321,7 +318,7 @@ class ApiClient {
 
       try {
         onCode.add(await _retrieveAccessToken(code));
-      } catch(e) {
+      } catch (e) {
         onCode.add(e.toString());
       } finally {
         await onCode.close();
@@ -336,7 +333,7 @@ class ApiException implements Exception {
   int code = 0;
   String cause;
 
-  ApiException(this.cause, { this.code });
+  ApiException(this.cause, {this.code});
 
   @override
   String toString() {

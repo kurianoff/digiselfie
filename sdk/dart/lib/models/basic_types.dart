@@ -13,14 +13,15 @@ class SocialProfile {
 
   SocialProfile({this.type, this.profileId, this.url});
 
-  factory SocialProfile.fromJson(Map<String, dynamic> json) => _$SocialProfileFromJson(json);
+  factory SocialProfile.fromJson(Map<String, dynamic> json) =>
+      _$SocialProfileFromJson(json);
   Map<String, dynamic> toJson() => _$SocialProfileToJson(this);
 }
 
 @JsonSerializable()
 class Phone {
   @JsonKey(includeIfNull: false, name: 'Code', nullable: true)
-  String code;   //`json:"Code,omitempty"`
+  String code; //`json:"Code,omitempty"`
   @JsonKey(includeIfNull: false, name: 'Number', nullable: false)
   String number; //`json:"Number,omitempty"`
   @JsonKey(includeIfNull: false, name: 'Type', nullable: true)
@@ -45,9 +46,15 @@ class Website {
   @JsonKey(includeIfNull: false, name: 'ClientSecret', nullable: true)
   String clientSecret; //`json:"ClientSecret,omitempty"`
 
-  Website({this.url, this.name, this.description, this.clientId, this.clientSecret});
+  Website(
+      {this.url,
+      this.name,
+      this.description,
+      this.clientId,
+      this.clientSecret});
 
-  factory Website.fromJson(Map<String, dynamic> json) => _$WebsiteFromJson(json);
+  factory Website.fromJson(Map<String, dynamic> json) =>
+      _$WebsiteFromJson(json);
   Map<String, dynamic> toJson() => _$WebsiteToJson(this);
 }
 
@@ -68,10 +75,17 @@ class Address {
   @JsonKey(includeIfNull: false, name: 'Type', nullable: true)
   String type;
 
-  Address({this.address1, this.address2, this.city, this.zip,
-    this.state, this.country, this.type});
+  Address(
+      {this.address1,
+      this.address2,
+      this.city,
+      this.zip,
+      this.state,
+      this.country,
+      this.type});
 
-  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }
 

@@ -15,8 +15,13 @@ class OAuthConfig {
   String oAuthTokenUrl;
   OAuthCallbackHandler callbackHandler;
 
-  OAuthConfig({this.clientId, this.secret, this.callbackUri,
-    this.oAuthUrl, this.oAuthTokenUrl, this.callbackHandler });
+  OAuthConfig(
+      {this.clientId,
+      this.secret,
+      this.callbackUri,
+      this.oAuthUrl,
+      this.oAuthTokenUrl,
+      this.callbackHandler});
 
   void set serverUrl(String serverUrl) {
     serverUrl = serverUrl + "/oauth2";
@@ -24,4 +29,3 @@ class OAuthConfig {
     this.oAuthTokenUrl = serverUrl + this.oAuthTokenUrl;
   }
 }
-

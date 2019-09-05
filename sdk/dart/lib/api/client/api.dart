@@ -36,7 +36,8 @@ class Api {
     String url = ApiEndpoints.UserInfo;
     try {
       ApiResponse response = await this.client.makeCall("GET", url, null, null);
-      this.defaultSelfie = ClaimDigiSelfie.fromJson(JsonDecoder().convert(response.body));
+      this.defaultSelfie =
+          ClaimDigiSelfie.fromJson(JsonDecoder().convert(response.body));
     } on ApiException {
       this.defaultSelfie = null;
     }

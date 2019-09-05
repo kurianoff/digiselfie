@@ -9,8 +9,11 @@ mixin TypedObjectMixin {
 mixin DigitalSelfieUpdatesMixin {
   @JsonKey(includeIfNull: true, name: 'Id', nullable: false)
   String id; //`json:"ID,omitempty"`
-  @JsonKey(includeIfNull: false, name: 'LastUpdates',
-      fromJson: dateTimeFromEpochUs, toJson: dateTimeToEpochUs)
+  @JsonKey(
+      includeIfNull: false,
+      name: 'LastUpdates',
+      fromJson: dateTimeFromEpochUs,
+      toJson: dateTimeToEpochUs)
   DateTime lastUpdates; //`json:"LastUpdates,omitempty"`
 }
 
@@ -27,11 +30,17 @@ mixin DigitalSelfieReadOnlyMixin {
   String credentials; //`json:"Credentials,omitempty"`
   @JsonKey(includeIfNull: false, name: 'ApplicationId', nullable: true)
   String applicationId; //`json:"ApplicationId,omitempty"`
-  @JsonKey(includeIfNull: false, name: 'Deleted',
-      fromJson: dateTimeFromEpochUs, toJson: dateTimeToEpochUs)
+  @JsonKey(
+      includeIfNull: false,
+      name: 'Deleted',
+      fromJson: dateTimeFromEpochUs,
+      toJson: dateTimeToEpochUs)
   DateTime deleted; //`json:"Deleted,omitempty"`
-  @JsonKey(includeIfNull: false, name: 'Ttl',
-      fromJson: dateTimeFromEpochUs, toJson: dateTimeToEpochUs)
+  @JsonKey(
+      includeIfNull: false,
+      name: 'Ttl',
+      fromJson: dateTimeFromEpochUs,
+      toJson: dateTimeToEpochUs)
   DateTime ttl; //`json:"ttl,omitempty"`
 }
 
