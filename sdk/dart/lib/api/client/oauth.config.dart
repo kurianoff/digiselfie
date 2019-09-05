@@ -23,7 +23,7 @@ class OAuthConfig {
       this.oAuthTokenUrl,
       this.callbackHandler});
 
-  void set serverUrl(String serverUrl) {
+  set serverUrl(String serverUrl) {
     serverUrl = serverUrl + "/oauth2";
     this.oAuthUrl = serverUrl + this.oAuthUrl;
     this.oAuthTokenUrl = serverUrl + this.oAuthTokenUrl;

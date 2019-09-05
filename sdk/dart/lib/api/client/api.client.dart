@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
 import 'library.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:digiselfie_sdk/models/library.dart';
 
 class ResponseTester {
@@ -243,7 +244,7 @@ class ApiClient {
     String streamData;
 
     try {
-      _getOAuthRolling(digithentiCode);
+      unawaited(_getOAuthRolling(digithentiCode));
     } catch (e) {
       throw ApiException(e.toString());
     }
