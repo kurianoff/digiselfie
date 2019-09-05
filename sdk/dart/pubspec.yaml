@@ -1,7 +1,7 @@
 name: digiselfie_sdk
 description: >-
   SDK for DigiSelfie platform
-version: 0.0.1
+version: 0.0.2
 author: Constantine Kurianoff <constantine@kurianoff.com>
 homepage: https://www.digiselfie.com
 
