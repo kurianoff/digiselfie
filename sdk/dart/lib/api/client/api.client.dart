@@ -86,7 +86,53 @@ class ApiClient {
 
   Api reconnect(AccessTokenJar credentials) {
     this._accessTokenJar = credentials;
+
     return Api(this);
+  }
+
+  Future<bool> checkConnection() async {
+    String url = this.environment.oAuthConfig.introspectionUrl;
+
+    if (!this.hasToken) {
+      throw new ApiException("Access token is null");
+    }
+
+    String payload =
+        "token: ${this.accessTokenJar.accessToken}\n" +
+            "scope: ${this.accessTokenJar.scope}";
+
+    HttpClientResponse response;
+
+    try {
+      HttpClientRequest request =
+        await HttpClient().openUrl("POST", Uri.parse(url));
+
+      request.headers.add(HttpHeaders.contentTypeHeader,
+          "application/x-www-form-urlencoded");
+
+      request.headers.add(HttpHeaders.acceptHeader, "application/json");
+
+      request.write(payload);
+      response = await request.close();
+
+    } on ApiException {
+      rethrow;
+    } catch(e) {
+      throw ApiException(e.toString());
+    }
+
+    return ResponseTester._(response.statusCode).isOK;
+  }
+
+  Future<Api> refreshConnection() async {
+    String tokenJson = await _callTokenEndpoint("refresh_token",
+        "refresh_token=${this._accessTokenJar.refreshToken}");
+
+    return reconnect(
+        AccessTokenJar.fromJson(
+            JsonDecoder().convert(tokenJson)
+        )
+    );
   }
 
   Future<ApiResponse> makeCall(
@@ -262,11 +308,16 @@ class ApiClient {
   }
 
   Future<String> _retrieveAccessToken(String code) async {
+    return await _callTokenEndpoint("authorization_code", "code=${code}");
+  }
+
+  Future<String> _callTokenEndpoint(String grant_type, String query) async {
     OAuthConfig config = this.environment.oAuthConfig;
 
-    String payload = "grant_type=authorization_code" +
-        "&code=" +
-        code +
+    String payload = "grant_type=" +
+        grant_type +
+        "&" +
+        query +
         "&redirect_uri=" +
         Uri.encodeQueryComponent(config.callbackUri);
 

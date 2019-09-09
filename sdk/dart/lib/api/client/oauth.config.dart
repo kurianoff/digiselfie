@@ -13,6 +13,7 @@ class OAuthConfig {
   String callbackUri;
   String oAuthUrl;
   String oAuthTokenUrl;
+  String introspectionUrl;
   OAuthCallbackHandler callbackHandler;
 
   OAuthConfig(
@@ -21,11 +22,13 @@ class OAuthConfig {
       this.callbackUri,
       this.oAuthUrl,
       this.oAuthTokenUrl,
-      this.callbackHandler});
+      this.callbackHandler,
+      this.introspectionUrl});
 
   set serverUrl(String serverUrl) {
     serverUrl = serverUrl + "/oauth2";
     this.oAuthUrl = serverUrl + this.oAuthUrl;
     this.oAuthTokenUrl = serverUrl + this.oAuthTokenUrl;
+    this.introspectionUrl = serverUrl + this.introspectionUrl;
   }
 }
