@@ -1,3 +1,11 @@
+## [0.0.6] - September 9, 2019
+
+* Made ApiClient.accessTokenJar public for better token accessibility
+
+## [0.0.5] - September 9, 2019
+
+* Implemented proper handling of 'expires_in' parameter on the access token
+
 ## [0.0.4] - September 9, 2019
 
 * Added ability to check the validity of the API connection ( ApiClient.checkConnection() )

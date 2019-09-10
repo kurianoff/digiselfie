@@ -17,8 +17,10 @@ class AccessTokenJar extends ApiObject {
   @JsonKey(includeIfNull: true, name: 'token_type', nullable: false)
   String type;
   @JsonKey(
-      includeIfNull: true, name: 'expires_in', fromJson: _setTokenExpiration)
-  DateTime expires;
+      includeIfNull: true, name: 'expires_in',
+      //fromJson: _setTokenExpiration
+  )
+  int expires;
   @JsonKey(includeIfNull: true, name: 'refresh_token', nullable: false)
   String refreshToken;
   @JsonKey(includeIfNull: false, name: 'scope', nullable: false)

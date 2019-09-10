@@ -55,22 +55,18 @@ class ResponseTester {
 
 class ApiClient {
   ApiEnvironment environment;
-  AccessTokenJar _accessTokenJar;
+  AccessTokenJar accessTokenJar;
 
   bool get hasToken {
     return this.accessToken != "";
   }
 
-  AccessTokenJar get accessTokenJar {
-    return _accessTokenJar;
-  }
-
   String get accessToken {
-    if (this._accessTokenJar == null) {
+    if (this.accessTokenJar == null) {
       return "";
     }
 
-    return this._accessTokenJar.accessToken;
+    return this.accessTokenJar.accessToken;
   }
 
   ApiClient(this.environment);
@@ -85,12 +81,12 @@ class ApiClient {
   }
 
   Api reconnect(AccessTokenJar credentials) {
-    this._accessTokenJar = credentials;
+    this.accessTokenJar = credentials;
 
     return Api(this);
   }
 
-  Future<bool> checkConnection() async {
+  Future<bool> isAccessTokenValid() async {
     String url = this.environment.oAuthConfig.introspectionUrl;
 
     if (!this.hasToken) {
@@ -124,9 +120,9 @@ class ApiClient {
     return ResponseTester._(response.statusCode).isOK;
   }
 
-  Future<Api> refreshConnection() async {
+  Future<Api> refreshAccessToken() async {
     String tokenJson = await _callTokenEndpoint("refresh_token",
-        "refresh_token=${this._accessTokenJar.refreshToken}");
+        "refresh_token=${this.accessTokenJar.refreshToken}");
 
     return reconnect(
         AccessTokenJar.fromJson(
@@ -201,7 +197,7 @@ class ApiClient {
   Future<bool> authenticate(String apiKey, String secret) async {
     try {
       String exchangeCode = await this._digithenticate(apiKey, secret);
-      this._accessTokenJar = await _oAuthenticate(exchangeCode);
+      this.accessTokenJar = await _oAuthenticate(exchangeCode);
     } on ApiException {
       rethrow;
     } catch (e) {
@@ -279,7 +275,6 @@ class ApiClient {
       throw ApiException(e.toString());
     }
 
-    // TODO: handle errors
     if (!tester.isOK) {
       throw ApiException(body, code: response.statusCode);
     }

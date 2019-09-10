@@ -2,7 +2,7 @@ name: digiselfie_sdk
 description: >-
   SDK for DigiSelfie platform. Use this SDK to connect to DigiSelfie API and
   build interactive social networking applications on Flutter.
-version: 0.0.4
+version: 0.0.6
 author: Constantine Kurianoff <kurianoff@gmail.com>
 homepage: https://www.digiselfie.com
 
