@@ -53,6 +53,9 @@ DigitalSelfie _$DigitalSelfieFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Address.fromJson(e as Map<String, dynamic>))
         ?.toList()
+    ..personalImage = json['PersonalImage'] == null
+        ? null
+        : PersonalImage.fromJson(json['PersonalImage'] as Map<String, dynamic>)
     ..lockId = json['LockId'] as String;
 }
 
@@ -95,6 +98,7 @@ Map<String, dynamic> _$DigitalSelfieToJson(DigitalSelfie instance) {
   writeNotNull('SocialProfiles', instance.socialProfiles);
   writeNotNull('Websites', instance.websites);
   writeNotNull('Addresses', instance.addresses);
+  writeNotNull('PersonalImage', instance.personalImage);
   writeNotNull('LockId', instance.lockId);
   return val;
 }
@@ -139,6 +143,9 @@ DigitalSelfieWritable _$DigitalSelfieWritableFromJson(
         ?.map((e) =>
             e == null ? null : Address.fromJson(e as Map<String, dynamic>))
         ?.toList()
+    ..personalImage = json['PersonalImage'] == null
+        ? null
+        : PersonalImage.fromJson(json['PersonalImage'] as Map<String, dynamic>)
     ..lockId = json['LockId'] as String;
 }
 
@@ -174,6 +181,7 @@ Map<String, dynamic> _$DigitalSelfieWritableToJson(
   writeNotNull('SocialProfiles', instance.socialProfiles);
   writeNotNull('Websites', instance.websites);
   writeNotNull('Addresses', instance.addresses);
+  writeNotNull('PersonalImage', instance.personalImage);
   writeNotNull('LockId', instance.lockId);
   return val;
 }

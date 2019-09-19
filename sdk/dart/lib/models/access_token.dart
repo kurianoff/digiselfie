@@ -35,7 +35,7 @@ class AccessTokenJar extends ApiObject {
   @override
   Map<String, dynamic> toJson() => _$AccessTokenJarToJson(this);
 
-  static DateTime _setTokenExpiration(int expiresIn) => expiresIn == null
-      ? DateTime.now()
-      : DateTime.now().add(Duration(seconds: expiresIn));
+//  static DateTime _setTokenExpiration(int expiresIn) => expiresIn == null
+//      ? DateTime.now()
+//      : DateTime.now().add(Duration(seconds: expiresIn));
 }

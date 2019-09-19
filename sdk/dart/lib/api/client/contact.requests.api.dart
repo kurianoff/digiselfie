@@ -5,12 +5,10 @@ import 'package:digiselfie_sdk/models/library.dart';
 
 class ContactRequestsApi extends Api {
   String endpoint;
-  ClaimDigiSelfie defaultSelfie;
 
   ContactRequestsApi(ApiClient client, ClaimDigiSelfie defaultSelfie)
-      : super(client) {
+      : super.fromContext(client, defaultSelfie) {
     this.endpoint = ApiEndpoints.ContactRequests;
-    this.defaultSelfie = defaultSelfie;
   }
 
   Future<ApiResponse> accept(String myId, String requestId) async {

@@ -5,12 +5,10 @@ import 'package:digiselfie_sdk/models/library.dart';
 
 class ProfileExchangeApi extends Api {
   String endpoint;
-  ClaimDigiSelfie defaultSelfie;
 
   ProfileExchangeApi(ApiClient client, ClaimDigiSelfie defaultSelfie)
-      : super(client) {
+      : super.fromContext(client, defaultSelfie) {
     this.endpoint = ApiEndpoints.ProfileExchange;
-    this.defaultSelfie = defaultSelfie;
   }
 
   Future<void> performExchange(String mySelfieId, String exchangeCode) async {

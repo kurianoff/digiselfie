@@ -103,3 +103,29 @@ class Email {
   factory Email.fromJson(Map<String, dynamic> json) => _$EmailFromJson(json);
   Map<String, dynamic> toJson() => _$EmailToJson(this);
 }
+
+/*
+type PersonalImage struct {
+Photo    string
+PhotoUrl string `json:",omitempty"`
+Title    string
+Business string
+}
+ */
+
+@JsonSerializable()
+class PersonalImage {
+  @JsonKey(includeIfNull: false, name: 'Photo', nullable: false)
+  String photo;
+  @JsonKey(includeIfNull: false, name: 'PhotoUrl', nullable: true)
+  String photoUrl;
+  @JsonKey(includeIfNull: false, name: 'Title', nullable: true)
+  String title;
+  @JsonKey(includeIfNull: false, name: 'Business', nullable: true)
+  String business;
+
+  PersonalImage({this.photo, this.photoUrl, this.title, this.business});
+
+  factory PersonalImage.fromJson(Map<String, dynamic> json) => _$PersonalImageFromJson(json);
+  Map<String, dynamic> toJson() => _$PersonalImageToJson(this);
+}

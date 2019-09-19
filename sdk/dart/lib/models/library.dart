@@ -10,6 +10,7 @@ export 'mixins.dart';
 export 'relation.dart';
 export 'user.dart';
 export 'api_object.dart';
+export 'image.dart';
 
 DateTime dateTimeFromEpochUs(int us) =>
     us == null ? null : DateTime.fromMicrosecondsSinceEpoch(us);

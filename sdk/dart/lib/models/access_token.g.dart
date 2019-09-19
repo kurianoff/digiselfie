@@ -10,7 +10,7 @@ AccessTokenJar _$AccessTokenJarFromJson(Map<String, dynamic> json) {
   return AccessTokenJar(
     json['access_token'] as String,
     json['token_type'] as String,
-    json["expires_in"] as int,
+    json['expires_in'] as int,
     json['refresh_token'] as String,
     json['scope'] as String,
   );

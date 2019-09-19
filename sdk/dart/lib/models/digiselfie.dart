@@ -46,6 +46,7 @@ class DigitalSelfieReadOnly extends ApiObject
   Map<String, dynamic> toJson() => _$DigitalSelfieReadOnlyToJson(this);
 }
 
+// TODO: Figure out whether digiselfie list will have LastKey in any case?
 @JsonSerializable()
 class DigiSelfieList extends ApiObject {
   @JsonKey(includeIfNull: true, name: 'Items', nullable: true)
@@ -88,4 +89,25 @@ class PublicProfileDigiselfie extends ApiObject with ClaimDigiSelfieMixin {
       _$PublicProfileDigiselfieFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PublicProfileDigiselfieToJson(this);
+}
+
+class DigitalSelfieList {
+  List<DigitalSelfie> items;
+
+  DigitalSelfieList({this.items});
+
+  factory DigitalSelfieList.fromJson(List<dynamic> parsedJson) {
+    List<DigitalSelfie> items = new List<DigitalSelfie>();
+    items = parsedJson.map((i) => DigitalSelfie.fromJson(i)).toList();
+
+    return DigitalSelfieList(items: items);
+  }
+
+  List<dynamic> toJson() {
+    List result = List<dynamic>();
+    for (DigitalSelfie object in this.items) {
+      result.add(object.toJson());
+    }
+    return result;
+  }
 }

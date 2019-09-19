@@ -1,6 +1,6 @@
 class ApiEndpoints {
   static String Login = "/digithenticate";
-  static String Profiles = "/digiselfies";
+  static String Selfies = "/digiselfies";
   static String Credentials = "/digiselfies/credentials/{selfieId}";
   static String Profile = "/digiselfies/{id}";
   static String Relations = "/relation";
@@ -11,4 +11,5 @@ class ApiEndpoints {
   static String AccountSettings = "/user/{id}";
   static String ContactRequests = "/digiselfies/{id}/requests";
   static String ProfileExchange = "/exchange";
+  static String Image = "/image";
 }

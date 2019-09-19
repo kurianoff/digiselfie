@@ -5,11 +5,10 @@ import 'package:digiselfie_sdk/models/library.dart';
 
 class AccountsApi extends Api {
   String endpoint;
-  ClaimDigiSelfie defaultSelfie;
 
-  AccountsApi(ApiClient client, ClaimDigiSelfie defaultSelfie) : super(client) {
+  AccountsApi(ApiClient client, ClaimDigiSelfie defaultSelfie)
+      : super.fromContext(client, defaultSelfie) {
     this.endpoint = ApiEndpoints.Accounts;
-    this.defaultSelfie = defaultSelfie;
   }
 
   Future<ApiResponse> locate(String email, String phone) async {

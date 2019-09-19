@@ -1,3 +1,6 @@
+import 'package:digiselfie_sdk/api/client/image.api.dart';
+import 'package:digiselfie_sdk/api/client/selfies.api.dart';
+
 import 'library.dart';
 import 'package:digiselfie_sdk/models/library.dart';
 import 'dart:async';
@@ -10,22 +13,32 @@ class Api {
   ApiClient client;
   ClaimDigiSelfie defaultSelfie;
 
+  Api.fromContext(this.client, this.defaultSelfie);
+
   Api(this.client) {
-    if (this.isAuthenticated) {
-      getDefaultSelfie();
-    }
+//    if (this.isAuthenticated) {
+//      getDefaultSelfie();
+//    }
   }
 
   ContactRequestsApi get contactRequests {
-    return new ContactRequestsApi(this.client, this.defaultSelfie);
+    return ContactRequestsApi(this.client, this.defaultSelfie);
   }
 
   ProfileExchangeApi get profileExchange {
-    return new ProfileExchangeApi(this.client, this.defaultSelfie);
+    return ProfileExchangeApi(this.client, this.defaultSelfie);
   }
 
   AccountsApi get accounts {
-    return new AccountsApi(this.client, this.defaultSelfie);
+    return AccountsApi(this.client, this.defaultSelfie);
+  }
+
+  SelfiesApi get selfies {
+    return SelfiesApi(this.client, this.defaultSelfie);
+  }
+
+  ImageApi get images {
+    return ImageApi(this.client, this.defaultSelfie);
   }
 
   bool get isAuthenticated {

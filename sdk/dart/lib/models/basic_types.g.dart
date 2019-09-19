@@ -133,3 +133,29 @@ Map<String, dynamic> _$EmailToJson(Email instance) {
   writeNotNull('Type', instance.type);
   return val;
 }
+
+PersonalImage _$PersonalImageFromJson(Map<String, dynamic> json) {
+  return PersonalImage(
+    photo: json['Photo'] as String,
+    photoUrl: json['PhotoUrl'] as String,
+    title: json['Title'] as String,
+    business: json['Business'] as String,
+  );
+}
+
+Map<String, dynamic> _$PersonalImageToJson(PersonalImage instance) {
+  final val = <String, dynamic>{
+    'Photo': instance.photo,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('PhotoUrl', instance.photoUrl);
+  writeNotNull('Title', instance.title);
+  writeNotNull('Business', instance.business);
+  return val;
+}

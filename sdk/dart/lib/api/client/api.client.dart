@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
 import 'library.dart';
+import 'package:http/http.dart' as http;
 import 'package:pedantic/pedantic.dart';
+import 'package:path/path.dart';
+import 'package:async/async.dart';
 import 'package:digiselfie_sdk/models/library.dart';
 
 class ResponseTester {
@@ -90,7 +94,7 @@ class ApiClient {
     String url = this.environment.oAuthConfig.introspectionUrl;
 
     if (!this.hasToken) {
-      throw new ApiException("Access token is null");
+      throw new ApiException("Client is not authenticated (access token is null).");
     }
 
     String payload =
@@ -136,7 +140,7 @@ class ApiClient {
     url = this.environment.apiUrl + url;
     Uri uri;
 
-    print("Fetching " + url);
+    print("[$method] Calling " + url);
 
     try {
       uri = Uri.parse(url);
@@ -168,7 +172,18 @@ class ApiClient {
 
       String requestPayload = "";
       if (payload != null) {
+
+        if (payload is SpecialTypePayload) {
+          var sp = payload as SpecialTypePayload;
+          request.headers.add(HttpHeaders.contentTypeHeader,
+              sp.contentType);
+          // extract actual payload from StructuredPayload
+          payload = sp.data;
+        }
+
         if (payload is ApiObject) {
+          request.headers.add(HttpHeaders.contentTypeHeader,
+              "application/json");
           requestPayload = JsonEncoder().convert(payload.toJson());
         } else if (payload is String) {
           requestPayload = payload;
@@ -182,16 +197,68 @@ class ApiClient {
       print("Status code: " + response.statusCode.toString());
 
       body = await response.cast<List<int>>().transform(utf8.decoder).join();
+
+      print("Response body: \n" + body + "\n\n");
     } catch (e) {
       throw ApiException(e.toString());
     }
 
     ApiResponse apiResponse = ApiResponse(body, response.statusCode);
+
     if (!apiResponse.isOK) {
       throw ApiException(body, code: response.statusCode);
     }
 
     return apiResponse;
+  }
+
+  Future <ApiResponse> uploadAvatar(String url, File file) async {
+    if (file == null) {
+      throw ApiException("Avatar file is of zero size.");
+    }
+
+    url = this.environment.apiUrl + url;
+    Uri uri;
+
+    try {
+      uri = Uri.parse(url);
+    } catch (e) {
+      throw new ApiException(e.toString());
+    }
+
+    print("[POST] Calling " + url);
+
+    http.MultipartRequest request = http.MultipartRequest("POST", uri);
+    //add text fields
+
+    request.headers[HttpHeaders.contentTypeHeader] = "multipart/form-data";
+    if (this.hasToken) {
+      request.headers[HttpHeaders.authorizationHeader] =
+          "Bearer " + this.accessToken;
+    }
+
+    String body;
+    var response;
+
+    try {
+      request.files.add(
+          http.MultipartFile.fromBytes("image",
+              file.readAsBytesSync(), filename: "image")
+      );
+
+      response = await request.send();
+
+      //Get the response from the server
+      var responseData = await response.stream.toBytes();
+      body = String.fromCharCodes(responseData);
+
+      print ("[Upload Image] Received response: " + body);
+
+    } catch(e) {
+      throw ApiException(e.toString());
+    }
+
+    return ApiResponse(body, response.statusCode);
   }
 
   Future<bool> authenticate(String apiKey, String secret) async {

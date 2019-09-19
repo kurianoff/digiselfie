@@ -55,21 +55,21 @@ class ApiKey extends ApiObject with TypedObjectMixin {
 }
 
 class ApiKeyList {
-  List<ApiKey> apiKeyList;
+  List<ApiKey> items;
 
-  ApiKeyList({this.apiKeyList});
+  ApiKeyList({this.items});
 
   factory ApiKeyList.fromJson(List<dynamic> parsedJson) {
-    List<ApiKey> apiKeyList = new List<ApiKey>();
-    apiKeyList = parsedJson.map((i) => ApiKey.fromJson(i)).toList();
+    List<ApiKey> items = new List<ApiKey>();
+    items = parsedJson.map((i) => ApiKey.fromJson(i)).toList();
 
-    return new ApiKeyList(apiKeyList: apiKeyList);
+    return ApiKeyList(items: items);
   }
 
   List<dynamic> toJson() {
     List result = List<dynamic>();
-    for (ApiKey key in this.apiKeyList) {
-      result.add(key.toJson());
+    for (ApiKey object in this.items) {
+      result.add(object.toJson());
     }
     return result;
   }

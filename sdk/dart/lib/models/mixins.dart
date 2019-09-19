@@ -85,6 +85,9 @@ mixin DigitalSelfieWritableMixin {
   @JsonKey(includeIfNull: false, name: 'Addresses', nullable: true)
   List<Address> addresses; //`json:"Addresses,omitempty"`
 
+  @JsonKey(includeIfNull: false, name: 'PersonalImage', nullable: true)
+  PersonalImage personalImage;
+
   @JsonKey(includeIfNull: false, name: 'LockId', nullable: true)
   String lockId; //`json:",omitempty"`
 }
