@@ -12,6 +12,11 @@ class SelfiesApi extends Api {
     this.endpoint = ApiEndpoints.Selfies;
   }
 
+  Future<ApiResponse> get(String id) async {
+    return await this.client.makeCall("GET",
+        ApiEndpoints.Profile.replaceAll("{id}", id), null, null);
+  }
+
   Future<ApiResponse> getAll() async {
     return await this.client.makeCall("GET", this.endpoint, null, null);
   }

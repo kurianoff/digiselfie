@@ -10,6 +10,7 @@ class DigitalSelfie extends ApiObject
         TypedObjectMixin,
         DigitalSelfieReadOnlyMixin,
         DigitalSelfieWritableMixin {
+
   DigitalSelfie();
 
   factory DigitalSelfie.fromJson(Map<String, dynamic> json) =>
@@ -24,6 +25,7 @@ class DigitalSelfieWritable extends ApiObject
         DigitalSelfieUpdatesMixin,
         TypedObjectMixin,
         DigitalSelfieWritableMixin {
+
   DigitalSelfieWritable();
 
   factory DigitalSelfieWritable.fromJson(Map<String, dynamic> json) =>

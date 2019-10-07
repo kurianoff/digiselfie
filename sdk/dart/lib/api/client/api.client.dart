@@ -1,12 +1,9 @@
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
-import 'package:http_parser/http_parser.dart';
 import 'library.dart';
 import 'package:http/http.dart' as http;
 import 'package:pedantic/pedantic.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'package:digiselfie_sdk/models/library.dart';
 
 class ResponseTester {
@@ -62,7 +59,7 @@ class ApiClient {
   AccessTokenJar accessTokenJar;
 
   bool get hasToken {
-    return this.accessToken != "";
+    return !["", null].contains(accessToken);
   }
 
   String get accessToken {

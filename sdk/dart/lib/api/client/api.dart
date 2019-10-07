@@ -16,9 +16,6 @@ class Api {
   Api.fromContext(this.client, this.defaultSelfie);
 
   Api(this.client) {
-//    if (this.isAuthenticated) {
-//      getDefaultSelfie();
-//    }
   }
 
   ContactRequestsApi get contactRequests {
@@ -51,7 +48,9 @@ class Api {
       ApiResponse response = await this.client.makeCall("GET", url, null, null);
       this.defaultSelfie =
           ClaimDigiSelfie.fromJson(JsonDecoder().convert(response.body));
-    } on ApiException {
+      print("Set default selfie to: " + this.defaultSelfie.toString());
+    } catch(e) {
+      print("Error: " + e.toString());
       this.defaultSelfie = null;
     }
   }

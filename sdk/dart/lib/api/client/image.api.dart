@@ -4,7 +4,6 @@ import 'package:digiselfie_sdk/digiselfie_sdk.dart';
 
 import 'api.dart';
 import 'api.client.dart';
-import 'special.type.payload.dart';
 import 'endpoints.dart';
 import 'dart:io';
 

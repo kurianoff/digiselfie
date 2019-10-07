@@ -1,3 +1,8 @@
+## [0.0.7] - October 6, 2019
+
+* Safe-wrapped DigitalSelfie object for UI-friendliness
+* Performed all-way code refactoring
+
 ## [0.0.6] - September 9, 2019
 
 * Made ApiClient.accessTokenJar public for better token accessibility

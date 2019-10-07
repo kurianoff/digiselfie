@@ -19,37 +19,37 @@ DigitalSelfie _$DigitalSelfieFromJson(Map<String, dynamic> json) {
     ..applicationId = json['ApplicationId'] as String
     ..deleted = dateTimeFromEpochUs(json['Deleted'] as int)
     ..ttl = dateTimeFromEpochUs(json['Ttl'] as int)
-    ..company = json['Company'] as String
-    ..title = json['Title'] as String
-    ..name = json['Name'] as String
-    ..firstName = json['FirstName'] as String
-    ..middleName = json['MiddleName'] as String
-    ..lastName = json['LastName'] as String
-    ..nickname = json['Nickname'] as String
+    ..innerCompany = json['Company'] as String
+    ..innerTitle = json['Title'] as String
+    ..innerName = json['Name'] as String
+    ..innerFirstName = json['FirstName'] as String
+    ..innerMiddleName = json['MiddleName'] as String
+    ..innerLastName = json['LastName'] as String
+    ..innerNickname = json['Nickname'] as String
     ..suffix = json['Suffix'] as String
     ..salutation = json['Salutation'] as String
     ..hashTags = json['HashTags'] as String
     ..photo = json['Photo'] as String
-    ..phone = json['Phone'] as String
-    ..email = json['Email'] as String
-    ..phones = (json['Phones'] as List)
+    ..innerPhone = json['Phone'] as String
+    ..innerEmail = json['Email'] as String
+    ..innerPhones = (json['Phones'] as List)
         ?.map(
             (e) => e == null ? null : Phone.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..emails = (json['Emails'] as List)
+    ..innerEmails = (json['Emails'] as List)
         ?.map(
             (e) => e == null ? null : Email.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..socialProfiles = (json['SocialProfiles'] as List)
+    ..innerSocialProfiles = (json['SocialProfiles'] as List)
         ?.map((e) => e == null
             ? null
             : SocialProfile.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..websites = (json['Websites'] as List)
+    ..innerWebsites = (json['Websites'] as List)
         ?.map((e) =>
             e == null ? null : Website.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..addresses = (json['Addresses'] as List)
+    ..innerAddresses = (json['Addresses'] as List)
         ?.map((e) =>
             e == null ? null : Address.fromJson(e as Map<String, dynamic>))
         ?.toList()
@@ -80,24 +80,24 @@ Map<String, dynamic> _$DigitalSelfieToJson(DigitalSelfie instance) {
   writeNotNull('ApplicationId', instance.applicationId);
   writeNotNull('Deleted', dateTimeToEpochUs(instance.deleted));
   writeNotNull('Ttl', dateTimeToEpochUs(instance.ttl));
-  writeNotNull('Company', instance.company);
-  writeNotNull('Title', instance.title);
-  writeNotNull('Name', instance.name);
-  val['FirstName'] = instance.firstName;
-  writeNotNull('MiddleName', instance.middleName);
-  writeNotNull('LastName', instance.lastName);
-  val['Nickname'] = instance.nickname;
+  writeNotNull('Company', instance.innerCompany);
+  writeNotNull('Title', instance.innerTitle);
+  writeNotNull('Name', instance.innerName);
+  val['FirstName'] = instance.innerFirstName;
+  writeNotNull('MiddleName', instance.innerMiddleName);
+  writeNotNull('LastName', instance.innerLastName);
+  val['Nickname'] = instance.innerNickname;
   writeNotNull('Suffix', instance.suffix);
   writeNotNull('Salutation', instance.salutation);
   writeNotNull('HashTags', instance.hashTags);
   writeNotNull('Photo', instance.photo);
-  writeNotNull('Phone', instance.phone);
-  writeNotNull('Email', instance.email);
-  writeNotNull('Phones', instance.phones);
-  writeNotNull('Emails', instance.emails);
-  writeNotNull('SocialProfiles', instance.socialProfiles);
-  writeNotNull('Websites', instance.websites);
-  writeNotNull('Addresses', instance.addresses);
+  writeNotNull('Phone', instance.innerPhone);
+  writeNotNull('Email', instance.innerEmail);
+  writeNotNull('Phones', instance.innerPhones);
+  writeNotNull('Emails', instance.innerEmails);
+  writeNotNull('SocialProfiles', instance.innerSocialProfiles);
+  writeNotNull('Websites', instance.innerWebsites);
+  writeNotNull('Addresses', instance.innerAddresses);
   writeNotNull('PersonalImage', instance.personalImage);
   writeNotNull('LockId', instance.lockId);
   return val;
@@ -109,37 +109,37 @@ DigitalSelfieWritable _$DigitalSelfieWritableFromJson(
     ..type = json['Type'] as String
     ..id = json['Id'] as String
     ..lastUpdates = dateTimeFromEpochUs(json['LastUpdates'] as int)
-    ..company = json['Company'] as String
-    ..title = json['Title'] as String
-    ..name = json['Name'] as String
-    ..firstName = json['FirstName'] as String
-    ..middleName = json['MiddleName'] as String
-    ..lastName = json['LastName'] as String
-    ..nickname = json['Nickname'] as String
+    ..innerCompany = json['Company'] as String
+    ..innerTitle = json['Title'] as String
+    ..innerName = json['Name'] as String
+    ..innerFirstName = json['FirstName'] as String
+    ..innerMiddleName = json['MiddleName'] as String
+    ..innerLastName = json['LastName'] as String
+    ..innerNickname = json['Nickname'] as String
     ..suffix = json['Suffix'] as String
     ..salutation = json['Salutation'] as String
     ..hashTags = json['HashTags'] as String
     ..photo = json['Photo'] as String
-    ..phone = json['Phone'] as String
-    ..email = json['Email'] as String
-    ..phones = (json['Phones'] as List)
+    ..innerPhone = json['Phone'] as String
+    ..innerEmail = json['Email'] as String
+    ..innerPhones = (json['Phones'] as List)
         ?.map(
             (e) => e == null ? null : Phone.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..emails = (json['Emails'] as List)
+    ..innerEmails = (json['Emails'] as List)
         ?.map(
             (e) => e == null ? null : Email.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..socialProfiles = (json['SocialProfiles'] as List)
+    ..innerSocialProfiles = (json['SocialProfiles'] as List)
         ?.map((e) => e == null
             ? null
             : SocialProfile.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..websites = (json['Websites'] as List)
+    ..innerWebsites = (json['Websites'] as List)
         ?.map((e) =>
             e == null ? null : Website.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..addresses = (json['Addresses'] as List)
+    ..innerAddresses = (json['Addresses'] as List)
         ?.map((e) =>
             e == null ? null : Address.fromJson(e as Map<String, dynamic>))
         ?.toList()
@@ -163,24 +163,24 @@ Map<String, dynamic> _$DigitalSelfieWritableToJson(
   }
 
   writeNotNull('LastUpdates', dateTimeToEpochUs(instance.lastUpdates));
-  writeNotNull('Company', instance.company);
-  writeNotNull('Title', instance.title);
-  writeNotNull('Name', instance.name);
-  val['FirstName'] = instance.firstName;
-  writeNotNull('MiddleName', instance.middleName);
-  writeNotNull('LastName', instance.lastName);
-  val['Nickname'] = instance.nickname;
+  writeNotNull('Company', instance.innerCompany);
+  writeNotNull('Title', instance.innerTitle);
+  writeNotNull('Name', instance.innerName);
+  val['FirstName'] = instance.innerFirstName;
+  writeNotNull('MiddleName', instance.innerMiddleName);
+  writeNotNull('LastName', instance.innerLastName);
+  val['Nickname'] = instance.innerNickname;
   writeNotNull('Suffix', instance.suffix);
   writeNotNull('Salutation', instance.salutation);
   writeNotNull('HashTags', instance.hashTags);
   writeNotNull('Photo', instance.photo);
-  writeNotNull('Phone', instance.phone);
-  writeNotNull('Email', instance.email);
-  writeNotNull('Phones', instance.phones);
-  writeNotNull('Emails', instance.emails);
-  writeNotNull('SocialProfiles', instance.socialProfiles);
-  writeNotNull('Websites', instance.websites);
-  writeNotNull('Addresses', instance.addresses);
+  writeNotNull('Phone', instance.innerPhone);
+  writeNotNull('Email', instance.innerEmail);
+  writeNotNull('Phones', instance.innerPhones);
+  writeNotNull('Emails', instance.innerEmails);
+  writeNotNull('SocialProfiles', instance.innerSocialProfiles);
+  writeNotNull('Websites', instance.innerWebsites);
+  writeNotNull('Addresses', instance.innerAddresses);
   writeNotNull('PersonalImage', instance.personalImage);
   writeNotNull('LockId', instance.lockId);
   return val;

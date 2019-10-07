@@ -16,8 +16,8 @@ class AccountsApi extends Api {
         this.endpoint + "?ak=" + this.client.environment.applicationApiKey;
 
     var accountLocator = AccountCreateRecoverRequest(
-      email: email,
-      phone: phone,
+      email: email == null ? "" : email,
+      phone: phone == null ? "" : phone,
       applicationId: this.client.environment.applicationId,
     );
 
